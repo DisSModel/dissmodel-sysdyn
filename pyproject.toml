@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dissmodel-sysdyn"
+version = "0.1.0"
+description = "System Dynamics models for dissmodel"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "dissmodel>=0.1.0",
+    "streamlit",
+]
+authors = [
+    { name = "Sergio", email = "sergio@example.com" },
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["dissmodel_sysdyn*"]
