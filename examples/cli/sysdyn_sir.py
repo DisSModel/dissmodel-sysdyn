@@ -8,7 +8,7 @@ individuals, then recover and gain immunity.
 
 Usage
 -----
-    python dissmodel_sysdyn/cli/sysdyn_sir.py
+    python examples/cli/sysdyn_sir.py
 """
 from __future__ import annotations
 
