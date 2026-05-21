@@ -8,7 +8,7 @@ individuals, then recover and gain immunity.
 
 Usage
 -----
-    streamlit run dissmodel_sysdyn/streamlit/sysdyn_sir.py
+    streamlit run examples/streamlit/sysdyn_sir.py
 """
 from __future__ import annotations
 
