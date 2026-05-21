@@ -22,5 +22,5 @@ dev = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["src"]
-include = ["dissmodel_sysdyn*"]
+package-dir = {"" = "src"}
+packages = ["dissmodel_sysdyn", "dissmodel_sysdyn.models"]
