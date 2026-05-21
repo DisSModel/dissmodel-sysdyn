@@ -12,7 +12,7 @@ This is possible because all models follow the same conventions:
 
 Usage
 -----
-    streamlit run dissmodel_sysdyn/streamlit/sysdyn_all.py
+    streamlit run examples/streamlit/sysdyn_all.py
 """
 from __future__ import annotations
 
