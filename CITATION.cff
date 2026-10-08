@@ -13,7 +13,7 @@ authors:
   - family-names: "Vale"
     given-names: "Mateus Dutra"
     orcid: "https://orcid.org/0009-0005-1301-879X"
-version: 0.1.0
+version: 0.1.1
 date-released: "2026-10-08"
 license: MIT
 url: "https://github.com/DisSModel/dissmodel-sysdyn"

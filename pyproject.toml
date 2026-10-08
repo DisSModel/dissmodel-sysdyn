@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dissmodel-sysdyn"
-version = "0.1.0"
+version = "0.1.1"
 description = "System dynamics models for DisSModel"
 readme = "README.md"
 license = { text = "MIT" }
 authors = [
     { name = "Sérgio Souza Costa", email = "sergio.costa@ufma.br" },
-    { name = "Mateus Dutra Vale" },
     { name = "Nerval de Jesus Santos Junior" },
+    { name = "Mateus Dutra Vale" },
 ]
 requires-python = ">=3.10"
 dependencies = [

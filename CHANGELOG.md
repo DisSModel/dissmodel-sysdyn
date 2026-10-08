@@ -1,8 +1,10 @@
 # Changelog
 
-## [0.1.0] — 2026-10-08
+## [0.1.1] — 2026-10-08
 
-First citable release.
+First citable release. The `v0.1.0` tag was created before the release
+branch was merged and points to the previous code (no license, citation
+metadata or tests); use 0.1.1.
 
 - Models compatible with dissmodel 0.5.0 or later (tested with 0.5.0, 0.6.0 and 0.6.6).
 - `tests/test_models_smoke.py` runs every exported model for a few steps, headless,
