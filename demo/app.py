@@ -6,6 +6,14 @@ Interactive interface to explore system dynamics models from the
 
 This application dynamically discovers all available models and generates 
 the corresponding UI for parameters and live plotting.
+
+Standalone: this folder is what gets deployed (e.g. to a Hugging Face
+Space), so the app imports only installed packages (see requirements.txt).
+
+Usage
+-----
+    pip install -r requirements.txt
+    streamlit run app.py
 """
 from __future__ import annotations
 

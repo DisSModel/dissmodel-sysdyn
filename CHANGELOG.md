@@ -9,4 +9,7 @@ First citable release.
   and checks that its state stays numeric; a GitHub Actions workflow runs it.
 - `streamlit` is no longer a required dependency: no module of the package uses
   it, only the Streamlit examples (`pip install "dissmodel-sysdyn[examples]"`).
+- `demo/`: self-contained Streamlit app (Dockerfile, pinned requirements,
+  Hugging Face Space header) that can be deployed on its own; before, the
+  Dockerfile copied `src/` and `pyproject.toml` from the repository root.
 - MIT license and `CITATION.cff`.

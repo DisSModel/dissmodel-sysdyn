@@ -1,2 +1,4 @@
-streamlit
-matplotlib
+# Pinned so that the deployed demo is reproducible; bump together with releases.
+dissmodel==0.6.6
+dissmodel-sysdyn @ git+https://github.com/DisSModel/dissmodel-sysdyn@v0.1.0
+streamlit>=1.30
