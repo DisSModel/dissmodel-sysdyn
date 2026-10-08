@@ -5,18 +5,23 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "dissmodel-sysdyn"
 version = "0.1.0"
-description = "System Dynamics models for dissmodel"
+description = "System dynamics models for DisSModel"
 readme = "README.md"
-requires-python = ">=3.9"
-dependencies = [
-    "dissmodel>=0.1.0",
-    "streamlit",
-]
+license = { text = "MIT" }
 authors = [
-    { name = "Sergio", email = "sergio@example.com" },
+    { name = "Sérgio Souza Costa", email = "sergio.costa@ufma.br" },
+    { name = "Mateus Dutra Vale" },
+    { name = "Nerval de Jesus Santos Junior" },
+]
+requires-python = ">=3.10"
+dependencies = [
+    "dissmodel>=0.5.0",
 ]
 
 [project.optional-dependencies]
+examples = [
+    "streamlit",
+]
 dev = [
     "pytest",
 ]
@@ -24,3 +29,9 @@ dev = [
 [tool.setuptools]
 package-dir = {"" = "src"}
 packages = ["dissmodel_sysdyn", "dissmodel_sysdyn.models"]
+
+[project.urls]
+Homepage = "https://github.com/DisSModel/dissmodel-sysdyn"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

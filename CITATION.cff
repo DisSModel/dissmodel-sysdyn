@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "dissmodel-sysdyn: System Dynamics extension for DisSModel"
+abstract: >-
+  System dynamics models for the DisSModel framework: population growth, SIR, predator-prey, Lorenz, Daisyworld and other classic examples, ported from the TerraME model collection.
+authors:
+  - family-names: "Costa"
+    given-names: "Sérgio Souza"
+    orcid: "https://orcid.org/0000-0002-0232-4549"
+  - family-names: "Vale"
+    given-names: "Mateus Dutra"
+    orcid: "https://orcid.org/0009-0005-1301-879X"
+  - family-names: "Santos Junior"
+    given-names: "Nerval de Jesus"
+    orcid: "https://orcid.org/0009-0000-2339-3191"
+version: 0.1.0
+date-released: "2026-10-08"
+license: MIT
+url: "https://github.com/DisSModel/dissmodel-sysdyn"
+repository-code: "https://github.com/DisSModel/dissmodel-sysdyn"
+keywords:
+  - system dynamics
+  - DisSModel
+  - simulation
+  - TerraME
+type: software
