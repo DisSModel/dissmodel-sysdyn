@@ -1,33 +1,24 @@
+# Self-contained: build from this folder only (e.g. a Hugging Face Space).
 FROM python:3.11-slim
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    build-essential \
-    libgl1 \
-    libglib2.0-0 \
+# git: dissmodel-sysdyn is installed from GitHub (not on PyPI)
+RUN apt-get update && apt-get install -y --no-install-recommends git \
     && rm -rf /var/lib/apt/lists/*
 
-# Set up a new user to avoid running as root
+# Hugging Face runs the container as uid 1000
 RUN useradd -m -u 1000 user
 USER user
 ENV HOME=/home/user \
-    PATH=/home/user/.local/bin:$PATH
+    PATH=/home/user/.local/bin:$PATH \
+    MPLBACKEND=Agg
 
 WORKDIR $HOME/app
 
-# Copy requirements and install
-COPY --chown=user demo/requirements.txt ./demo/requirements.txt
-RUN pip install --no-cache-dir -r demo/requirements.txt
+COPY --chown=user requirements.txt .
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-COPY --chown=user pyproject.toml README.md ./
-COPY --chown=user src ./src
-COPY --chown=user demo/app.py ./demo/app.py
+COPY --chown=user app.py .
 
-RUN pip install --no-cache-dir .
-
-# Expose the port Streamlit will run on (Hugging Face uses 7860)
+# Hugging Face Spaces expect port 7860
 EXPOSE 7860
-
-# Command to run the app
-CMD ["streamlit", "run", "demo/app.py", "--server.port", "7860", "--server.address", "0.0.0.0"]
+CMD ["streamlit", "run", "app.py", "--server.port", "7860", "--server.address", "0.0.0.0"]

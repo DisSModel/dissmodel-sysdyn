@@ -1,14 +1,18 @@
 # dissmodel-sysdyn
 
-System Dynamics models for [dissmodel](https://github.com/LambdaGeo/dissmodel).
+System Dynamics models for [dissmodel](https://github.com/DisSModel/dissmodel).
 
 This library provides a collection of System Dynamics models implemented using the `dissmodel` core.
 
 ## Installation
 
+The package is not on PyPI. Install it from GitHub:
+
 ```bash
-pip install dissmodel-sysdyn
+pip install git+https://github.com/DisSModel/dissmodel-sysdyn
 ```
+
+or, from a clone, `pip install .` (`pip install ".[examples]"` for the Streamlit apps, `pip install ".[dev]"` for the tests).
 
 ## Models
 
