@@ -64,7 +64,7 @@ if ModelClass.__doc__:
 # ---------------------------------------------------------------------------
 
 # 1. Environment
-env = Environment(start_time=0, end_time=steps)
+env = Environment(start_time=1, end_time=steps)
 
 # 2. Model
 model = ModelClass()

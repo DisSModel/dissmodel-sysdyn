@@ -76,7 +76,7 @@ class Decay(Model):
         self.amount -= decay
 
 # Running the simulation
-env = Environment(end_time=50)
+env = Environment(start_time=1, end_time=50)
 model = Decay()
 env.run()
 ```

@@ -61,7 +61,7 @@ run        = st.button("Run Simulation")
 # ---------------------------------------------------------------------------
 
 # 1. Environment
-env = Environment(start_time=0, end_time=steps)
+env = Environment(start_time=1, end_time=steps)
 
 # 2. Model — instantiated dynamically from sidebar selection
 ModelClass = model_classes[model_name]

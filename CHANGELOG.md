@@ -6,6 +6,10 @@
   `Model` stores the interval between ticks, so the interval grew at every
   execution (a run from t=1 to 30 executed 8 times). The counter is now
   `_tick`; a test checks that every model executes once per tick.
+- Examples, notebooks, demo and docs use `Environment(start_time=1, end_time=N)`,
+  which runs N steps at t = 1..N like a TerraME `Timer` with `finalTime = N`.
+  The default `start_time=0` runs one step more and shifts the clock by one hour
+  in `RoomTemperature`. A note in the docs explains the convention.
 
 ## [0.1.1] — 2026-10-08
 

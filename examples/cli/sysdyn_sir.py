@@ -26,7 +26,7 @@ from dissmodel.visualization import Chart
 # ---------------------------------------------------------------------------
 
 # 1. Environment
-env = Environment()
+env = Environment(start_time=1, end_time=30)
 
 # 2. Model
 SIR(
@@ -44,4 +44,4 @@ Chart(show_legend=True, show_grid=True, title="SIR Model")
 # ---------------------------------------------------------------------------
 # Run
 # ---------------------------------------------------------------------------
-env.run(30)
+env.run()

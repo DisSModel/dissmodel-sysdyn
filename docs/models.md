@@ -17,8 +17,15 @@ from dissmodel_sysdyn.models import SIR
 import matplotlib.pyplot as plt
 
 # Create the simulation environment
-env = Environment(end_time=60)
+env = Environment(start_time=1, end_time=60)
 ```
+
+!!! note "Counting steps as in TerraME"
+    `end_time` is inclusive. With `start_time=1, end_time=N` the model runs
+    N steps at t = 1, ..., N, like a TerraME `Timer` with `finalTime = N`.
+    The `Environment` default, `start_time=0`, runs one step more (t = 0, ..., N)
+    and shifts the clock by one, which matters for models that read `env.now()`,
+    such as `RoomTemperature`.
 
 ### Step 2: Model Configuration
 We instantiate the SIR model. We start with a nearly susceptible population and a small number of "Patient Zeros".
@@ -76,7 +83,7 @@ from dissmodel.core import Environment
 from dissmodel_sysdyn.models import PredatorPrey
 import matplotlib.pyplot as plt
 
-env = Environment(end_time=200)
+env = Environment(start_time=1, end_time=200)
 ```
 
 ### Step 2: Define Biological Parameters

@@ -42,7 +42,7 @@ run   = st.button("Run Simulation")
 # ---------------------------------------------------------------------------
 
 # 1. Environment
-env = Environment(start_time=0, end_time=steps)
+env = Environment(start_time=1, end_time=steps)
 
 # 2. Model
 sir = SIR(
