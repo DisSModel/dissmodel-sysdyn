@@ -10,6 +10,13 @@
   which runs N steps at t = 1..N like a TerraME `Timer` with `finalTime = N`.
   The default `start_time=0` runs one step more and shifts the clock by one hour
   in `RoomTemperature`. A note in the docs explains the convention.
+- `tests/test_terrame_parity.py` compares the full trajectory of each model
+  with a step-by-step transcription of the TerraME `sysdyn` package
+  (`terrame/sysdyn`, commit 9e671cb). Eleven models match within 1e-9.
+  Two known differences are kept as strict `xfail`: `MonoLake` (TerraME's
+  sampled Catmull-Rom spline vs scipy `CubicSpline`) and `Daisyworld`
+  (TerraME recomputes the planet albedo after updating the white area; same
+  equilibrium, different trajectory). `RandomWalk` is not compared.
 
 ## [0.1.1] — 2026-10-08
 
