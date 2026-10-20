@@ -44,3 +44,26 @@ def test_model_runs(name, cls):
     assert numeric, f"{name} exposes no numeric state"
     for key, value in numeric.items():
         assert math.isfinite(value), f"{name}.{key} = {value}"
+
+
+@pytest.mark.parametrize("name, cls", MODELS, ids=[n for n, _ in MODELS])
+def test_model_executes_once_per_tick(name, cls, monkeypatch):
+    """A model must not change its own scheduling.
+
+    ``dissmodel.core.Model`` keeps the interval between ticks in ``_step``;
+    a model that reuses that name (as ``Tub`` did up to 0.1.1) silently
+    skips ticks.
+    """
+    ticks: list[float] = []
+    original = cls.execute
+
+    def counting(self):
+        ticks.append(self.env.now())
+        original(self)
+
+    monkeypatch.setattr(cls, "execute", counting)
+    np.random.seed(0)
+    env = Environment(start_time=1, end_time=STEPS)
+    cls()
+    env.run()
+    assert ticks == list(range(1, STEPS + 1))

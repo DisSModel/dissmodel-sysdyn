@@ -39,7 +39,7 @@ class Tub(Model):
     Examples
     --------
     >>> from dissmodel.core import Environment
-    >>> env = Environment(end_time=8)
+    >>> env = Environment(start_time=1, end_time=30)
     >>> tub = Tub(water=40, out_flow=5, in_flow=20, in_period=10)
     >>> env.run()
     """
@@ -81,7 +81,10 @@ class Tub(Model):
         self.out_flow  = out_flow
         self.in_flow   = in_flow
         self.in_period = in_period
-        self._step     = 0
+        # Executions counter. Must not be named ``_step``: dissmodel's Model
+        # keeps the scheduling interval in ``_step``, so incrementing it here
+        # made the interval grow (ticks 1, 2, 4, 7, 11, ...).
+        self._tick     = 0
 
     def execute(self) -> None:
         """
@@ -90,13 +93,13 @@ class Tub(Model):
         Applies the outflow every step and the inflow every
         ``in_period`` steps. Water is clamped to zero from below.
         """
-        self._step += 1
+        self._tick += 1
 
         self.water -= self.out_flow
         if self.water < 0.0:
             self.water = 0.0
 
-        if self._step % self.in_period == 0:
+        if self._tick % self.in_period == 0:
             self.water += self.in_flow
 
 

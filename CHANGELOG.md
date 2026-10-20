@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+- **Fix:** `Tub` kept its counter in `_step`, the attribute where dissmodel's
+  `Model` stores the interval between ticks, so the interval grew at every
+  execution (a run from t=1 to 30 executed 8 times). The counter is now
+  `_tick`; a test checks that every model executes once per tick.
+
 ## [0.1.1] — 2026-10-08
 
 First citable release. The `v0.1.0` tag was created before the release
