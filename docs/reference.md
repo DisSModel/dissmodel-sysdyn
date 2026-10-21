@@ -29,7 +29,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import ChaoticGrowth
 
-env = Environment(end_time=100)
+env = Environment(start_time=1, end_time=100)
 model = ChaoticGrowth(pop=0.1, rate=3.9)
 env.run()
 ```
@@ -62,7 +62,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import Coffee
 
-env = Environment(end_time=30)
+env = Environment(start_time=1, end_time=30)
 coffee = Coffee(temperature=90, room_temperature=22, cooling_rate=0.15)
 env.run()
 ```
@@ -105,7 +105,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import Daisyworld
 
-env = Environment(end_time=200)
+env = Environment(start_time=1, end_time=200)
 model = Daisyworld(sun_luminosity=1.0)
 env.run()
 ```
@@ -138,7 +138,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import Homeostasis
 
-env = Environment(end_time=50)
+env = Environment(start_time=1, end_time=50)
 model = Homeostasis(stock=10, gain=5, rate=-0.2)
 env.run()
 ```
@@ -171,7 +171,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import LimitedGrowth
 
-env = Environment(end_time=100)
+env = Environment(start_time=1, end_time=100)
 model = LimitedGrowth(pop=10, rate=0.2, capacity=1000)
 env.run()
 ```
@@ -211,7 +211,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import Lorenz
 
-env = Environment(end_time=5000)
+env = Environment(start_time=1, end_time=5000)
 model = Lorenz()
 env.run()
 ```
@@ -245,7 +245,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import MonoLake
 
-env = Environment(end_time=50)
+env = Environment(start_time=1, end_time=50)
 model = MonoLake(export=150)
 env.run()
 ```
@@ -279,7 +279,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import PopulationGrowth
 
-env = Environment(end_time=20)
+env = Environment(start_time=1, end_time=20)
 model = PopulationGrowth(population=100, growth=0.05, growth_change=1.1)
 env.run()
 ```
@@ -311,7 +311,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import PredatorPrey
 
-env = Environment(end_time=200)
+env = Environment(start_time=1, end_time=200)
 model = PredatorPrey()
 env.run()
 ```
@@ -347,7 +347,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import RandomWalk
 
-env = Environment(end_time=100)
+env = Environment(start_time=1, end_time=100)
 model = RandomWalk(prob=0.55, seed=42)
 env.run()
 ```
@@ -383,7 +383,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import RoomTemperature
 
-env = Environment(end_time=24)
+env = Environment(start_time=1, end_time=24)
 model = RoomTemperature()
 env.run()
 ```
@@ -420,7 +420,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import SIR
 
-env = Environment(end_time=60)
+env = Environment(start_time=1, end_time=60)
 sir = SIR(infected=5, probability=0.3)
 env.run()
 ```
@@ -454,7 +454,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import Tub
 
-env = Environment(end_time=50)
+env = Environment(start_time=1, end_time=50)
 tub = Tub(water=100, out_flow=2, in_flow=50, in_period=20)
 env.run()
 ```
@@ -486,7 +486,7 @@ def execute(self) -> None:
 from dissmodel.core import Environment
 from dissmodel_sysdyn.models import Yeast
 
-env = Environment(end_time=15)
+env = Environment(start_time=1, end_time=15)
 yeast = Yeast()
 env.run()
 ```
