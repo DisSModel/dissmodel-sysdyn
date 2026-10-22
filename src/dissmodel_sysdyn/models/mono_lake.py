@@ -1,17 +1,17 @@
 from __future__ import annotations
 
-from scipy.interpolate import CubicSpline
-import numpy as np
-
 from dissmodel.core import Model
 from dissmodel.visualization import track_plot
 
-_VOLUME_KAF  = np.array([0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000], dtype=float)
-_SURFACE_KM2 = np.array([0, 24.7, 35.3, 48.6, 54.3, 57.2, 61.6, 66.0, 69.9], dtype=float)
-_ELEV_FT     = np.array([6224, 6335, 6369, 6392, 6412, 6430, 6447, 6463, 6477], dtype=float)
+from ._spline import Spline
 
-_water_surface   = CubicSpline(_VOLUME_KAF, _SURFACE_KM2, extrapolate=True)
-_water_elevation = CubicSpline(_VOLUME_KAF, _ELEV_FT,     extrapolate=True)
+_VOLUME_KAF  = [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000]
+_SURFACE_KM2 = [0, 24.7, 35.3, 48.6, 54.3, 57.2, 61.6, 66.0, 69.9]
+_ELEV_FT     = [6224, 6335, 6369, 6392, 6412, 6430, 6447, 6463, 6477]
+
+# As in TerraME: sci.Spline{points = ..., steps = 1000}
+_water_surface   = Spline(_VOLUME_KAF, _SURFACE_KM2, steps=1000)
+_water_elevation = Spline(_VOLUME_KAF, _ELEV_FT,     steps=1000)
 
 
 @track_plot("level", "blue")
@@ -42,6 +42,14 @@ class MonoLake(Model):
         Other annual outputs in KAF/year, by default 33.6.
     export : float, optional
         Annual water exported in KAF/year, by default 100.0.
+
+    Notes
+    -----
+    The lake surface and elevation are read from the volume through
+    TerraME's ``sci.Spline`` (:class:`~dissmodel_sysdyn.models._spline.Spline`):
+    a Catmull-Rom curve sampled at 1000 points per segment and read by
+    linear interpolation, as in the TerraME model. As there, a volume
+    outside 0 to about 7999.5 KAF raises an error instead of extrapolating.
 
     Examples
     --------
@@ -96,7 +104,7 @@ class MonoLake(Model):
         self.export        = export
 
     def _surface(self) -> float:
-        return float(_water_surface(self.water_in_lake))
+        return _water_surface.value(self.water_in_lake)
 
     def _total_input(self) -> float:
         return self._surface() * self.prec_rate + self.runoff + self.other_in
@@ -105,8 +113,9 @@ class MonoLake(Model):
         return self._surface() * self.evap_rate + self.export + self.other_out
 
     def execute(self) -> None:
-        self.water_in_lake += self._total_input() - self._total_output()
-        self.level = float(_water_elevation(self.water_in_lake))
+        # same order of operations as TerraME: (water + input) - output
+        self.water_in_lake = self.water_in_lake + self._total_input() - self._total_output()
+        self.level = _water_elevation.value(self.water_in_lake)
 
 
 __all__ = ["MonoLake"]

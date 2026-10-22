@@ -116,12 +116,14 @@ class PredatorPrey(Model):
         Updates prey and predator populations according to the
         discrete Lotka-Volterra equations.
         """
-        self.prey += (
-            self.prey_growth * self.prey
+        # same order of operations as TerraME, so that the results match it
+        # to the last bit; the predators use the prey already updated
+        self.prey = (
+            self.prey + self.prey_growth * self.prey
             - self.prey_death_pred * self.prey * self.predator
         )
-        self.predator += (
-            -self.pred_death * self.predator
+        self.predator = (
+            self.predator - self.pred_death * self.predator
             + self.pred_growth_kills * self.prey * self.predator
         )
 

@@ -1,0 +1,37 @@
+{
+  "source": "https://github.com/LambdaGeo/terrame-goldens",
+  "version": "v0.1.0",
+  "terrame": "2.0.1",
+  "packages": [
+    {
+      "name": "sysdyn",
+      "repository": "https://github.com/TerraME/sysdyn",
+      "commit": "9e671cb86ee33143bd910f1243bc71f2d1c5e5a9"
+    },
+    {
+      "name": "sci",
+      "repository": "https://github.com/TerraME/sci",
+      "commit": "42b0b3e319b6b6fe7bc2d3566e23876db12a2bac"
+    }
+  ],
+  "files": {
+    "goldens/sysdyn/chaotic_growth.csv.gz": "6328b3248918b88ec4adfc1002a99ec6c4d252fa1e6a3beaa0c1477faa528c75",
+    "goldens/sysdyn/coffee.csv.gz": "cf32769b784339a21489a54ef05f1e59c403da6857fa7421dd28e05f1581a4c1",
+    "goldens/sysdyn/daisyworld.csv.gz": "da394371bf4dc84114ae5c5815797d20aaa7fd85b6e7b182446e180f7d747c6c",
+    "goldens/sysdyn/homeostasis.csv.gz": "2cb49a621d7153e98632f7f0e11bfdc47ea04a105a2f659d6976bfa3dfc0fd4f",
+    "goldens/sysdyn/homeostasis_100.csv.gz": "6896a8faed843dc0c42f58194b284381fad971e793bed8de531ef26282ac280b",
+    "goldens/sysdyn/limited_growth.csv.gz": "9972047016a135b12c2e70e26209d438e1b911dd44ac927c47f4b8eab5f28b87",
+    "goldens/sysdyn/lorenz.csv.gz": "96c83fea2d715e3f649be194c7c5a2f436b2e11d9784bf38d86cb09e915038f6",
+    "goldens/sysdyn/mono_lake.csv.gz": "0b085b0286bb7af814f51c549c0fed539e142b2b40b19a37e74d166ca8f7db80",
+    "goldens/sysdyn/mono_lake_export_50.csv.gz": "fdc1b31b6181fc4a5d4ea6b82525d521f1ab0347e1162853d31423c7a62f6524",
+    "goldens/sysdyn/population_growth.csv.gz": "ac1e0a04495db4ab8239be3df64261420fdb6714e1f824bda7c4c4a094d87736",
+    "goldens/sysdyn/predator_prey.csv.gz": "51feea1fb7383c1eea15ee7cf8579003fe526b308644faf4423338aa6380434b",
+    "goldens/sysdyn/random_walk.csv.gz": "851545dee78e65f5f7a7d1b22fe2fbd4fffede22ceef795ce7a1536a891c7a6b",
+    "goldens/sysdyn/room_temperature.csv.gz": "353331f5f08929a2c9cb707bb83644b5ae1a114dbbffb75cfeb654bcc09c3276",
+    "goldens/sysdyn/sir.csv.gz": "c3381b461ba01945be76f257bfadbd4416ae532704663580cabd992d39c331ae",
+    "goldens/sysdyn/tub.csv.gz": "2a47c516a64fca621f1c86d9ac45c9c3c4b34a24aa9fdd2098288a022810bee8",
+    "goldens/sysdyn/yeast.csv.gz": "5db25a6ed8cf4ee8d5ff0bd171543d1e32c11f2bf26f4ae596ee91bd9dc41eba",
+    "goldens/sysdyn/yeast_rate_2.csv.gz": "7052dec647e5ff9d0f84d9e70d9549fe70349e1a04f11c07697f4e58a41e9b27"
+  },
+  "lorenz_steps": "0 to 100, then every 100th step"
+}
