@@ -15,16 +15,7 @@ Not covered: ``RandomWalk`` (different random generators); the SIR
 ``maximum`` event and the PredatorPrey ``period`` option (not ported, and
 inactive with the default values).
 
-Known differences, kept as strict ``xfail`` so that a fix is noticed:
-
-* ``MonoLake``: TerraME's ``sci.Spline`` is a Catmull-Rom curve sampled at
-  ``steps`` points per segment and read by linear interpolation; the Python
-  model uses ``scipy.interpolate.CubicSpline``. Up to 26 KAF of difference in
-  50 steps.
-* ``Daisyworld``: the Lua model recomputes the planet albedo for the black
-  daisies after updating the white area; the Python model uses the albedo
-  from the start of the step. The trajectories differ (up to 0.61 in area)
-  and reach the same equilibrium.
+``test_goldens.py`` compares the models with the output of TerraME itself.
 """
 from __future__ import annotations
 
@@ -241,11 +232,6 @@ def ref_mono_lake(final_time=50):
 
 # ---------------------------------------------------------------------------
 
-KNOWN_DIFFERENCE = {
-    "MonoLake": "TerraME uses a sampled Catmull-Rom spline; the model uses scipy CubicSpline",
-    "Daisyworld": "TerraME recomputes the planet albedo after updating the white area",
-}
-
 CASES = [
     # name, class, finalTime, attributes, reference, parameters
     ("Coffee", sd.Coffee, 20, ["temperature"], ref_coffee, {}),
@@ -266,10 +252,7 @@ CASES = [
 
 
 def _param(case):
-    name = case[0]
-    marks = ([pytest.mark.xfail(reason=KNOWN_DIFFERENCE[name], strict=True)]
-             if name in KNOWN_DIFFERENCE else [])
-    return pytest.param(*case, id=name, marks=marks)
+    return pytest.param(*case, id=case[0])
 
 
 @pytest.mark.parametrize("name, cls, final_time, attrs, reference, params",

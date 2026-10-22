@@ -92,7 +92,7 @@ class RoomTemperature(Model):
         self.outside = climate(t)
         inflow  = self.thermal_inertia * (self.temp_set - self.inside)
         outflow = self.loss_to_outside  * (self.inside   - self.outside)
-        self.inside += inflow - outflow
+        self.inside = self.inside + inflow - outflow  # TerraME's order of operations
 
 
 __all__ = ["RoomTemperature"]

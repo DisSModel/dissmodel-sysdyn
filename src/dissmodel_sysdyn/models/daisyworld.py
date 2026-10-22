@@ -65,6 +65,10 @@ class Daisyworld(Model):
 
     Notes
     -----
+    The step follows the TerraME ``sysdyn`` model line by line: the white
+    area is updated first, and the planet albedo used for the black daisies
+    is computed again with the new white area.
+
     The ``@track_plot`` decorators register ``white_area``,
     ``black_area``, ``empty_area``, and ``ave_temp`` for automatic
     live plotting.
@@ -88,6 +92,12 @@ class Daisyworld(Model):
 
     #: Current average planet temperature (K).
     ave_temp: float
+
+    #: Temperature near the white daisies in the last step (K).
+    temp_near_white: float
+
+    #: Temperature near the black daisies in the last step (K).
+    temp_near_black: float
 
     #: Solar luminosity (fractional).
     sun_luminosity: float
@@ -138,15 +148,16 @@ class Daisyworld(Model):
         )
 
     def execute(self) -> None:
-        pa = self._planet_albedo()
-        self.ave_temp = _planet_temp(self.sun_luminosity, pa)
+        self.ave_temp = _planet_temp(self.sun_luminosity, self._planet_albedo())
 
-        temp_white     = _local_temp(self.ave_temp, pa, self.white_albedo)
-        white_growth   = _daisy_growth_rate(temp_white) * self.empty_area
+        self.temp_near_white = _local_temp(self.ave_temp, self._planet_albedo(), self.white_albedo)
+        white_growth = _daisy_growth_rate(self.temp_near_white) * self.empty_area
         self.white_area += self.white_area * (white_growth - self.decay_rate)
 
-        temp_black     = _local_temp(self.ave_temp, pa, self.black_albedo)
-        black_growth   = _daisy_growth_rate(temp_black) * self.empty_area
+        # As in TerraME, the planet albedo is computed again here, with the
+        # new white area (and the black and empty areas of the start of the step)
+        self.temp_near_black = _local_temp(self.ave_temp, self._planet_albedo(), self.black_albedo)
+        black_growth = _daisy_growth_rate(self.temp_near_black) * self.empty_area
         self.black_area += self.black_area * (black_growth - self.decay_rate)
 
         self.empty_area = self.planet_area - (self.white_area + self.black_area)

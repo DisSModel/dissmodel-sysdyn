@@ -2,6 +2,27 @@
 
 ## [Unreleased]
 
+- **Fix:** `Daisyworld` now follows TerraME: after updating the white area,
+  it computes the planet albedo again for the black daisies. The trajectory
+  changes (up to 0.61 in area); the equilibrium is the same. New attributes
+  `temp_near_white` and `temp_near_black`, as in TerraME.
+- **Fix:** `MonoLake` reads the lake surface and elevation with TerraME's
+  `sci.Spline` (a Catmull-Rom curve sampled at 1000 points per segment and
+  read linearly; new `dissmodel_sysdyn.models._spline.Spline`) instead of
+  scipy's `CubicSpline`, which differed by up to 26 KAF in 50 steps. As in
+  TerraME, a volume outside the curve raises an error instead of
+  extrapolating. scipy, which was used without being a declared
+  dependency, is no longer needed.
+- `PredatorPrey`, `RoomTemperature`, `SIR` and `MonoLake` do their
+  arithmetic in TerraME's order, so that the results are the same doubles.
+- `tests/test_goldens.py` (marker `golden`): every model against TerraME
+  2.0.1 runs from `terrame-goldens` v0.1.0. All 16 deterministic cases
+  (13 models, some with two parameter sets) give **the same doubles as
+  TerraME at every step**; RandomWalk is compared by distribution.
+  `tests/goldens/` holds the goldens, their SHA-256 provenance and the
+  script that copies them. The strict `xfail`s of `Daisyworld` and
+  `MonoLake` in `test_terrame_parity.py` are removed.
+
 - **Fix:** `Tub` kept its counter in `_step`, the attribute where dissmodel's
   `Model` stores the interval between ticks, so the interval grew at every
   execution (a run from t=1 to 30 executed 8 times). The counter is now

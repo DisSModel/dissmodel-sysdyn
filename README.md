@@ -25,6 +25,16 @@ The library includes a wide range of System Dynamics models:
 *   **Environment**: Mono Lake Water Balance.
 *   **Stochasticity**: Random Walk.
 
+## Verification against TerraME
+
+Every model was run in TerraME 2.0.1 with the `sysdyn` package
+([`terrame-goldens`](https://github.com/LambdaGeo/terrame-goldens) v0.1.0).
+For the 16 deterministic cases (13 models, some with two parameter sets),
+the Python models give **the same doubles as TerraME at every step**, bit for
+bit, for every variable TerraME records; RandomWalk is compared by
+distribution. `tests/test_goldens.py` runs these comparisons
+(`pytest -m golden`, under a second).
+
 ## Examples
 
 The project includes several examples demonstrating how to run the models via CLI, Streamlit, or Jupyter Notebooks.

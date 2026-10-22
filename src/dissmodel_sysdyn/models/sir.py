@@ -119,15 +119,16 @@ class SIR(Model):
         Computes new infections and recoveries, then updates the
         susceptible, infected, and recovered compartments.
         """
-        total = self.susceptible + self.infected + self.recovered
-        alpha = self.contacts * self.probability
+        # same order of operations as TerraME, so that the results match it
+        # to the last bit
+        proportion = self.susceptible / (self.susceptible + self.infected + self.recovered)
 
-        new_infected  = self.infected * alpha * (self.susceptible / total)
+        new_infected  = self.infected * self.contacts * self.probability * proportion
         new_recovered = self.infected / self.duration
 
-        self.susceptible -= new_infected
-        self.infected    += new_infected - new_recovered
-        self.recovered   += new_recovered
+        self.susceptible = self.susceptible - new_infected
+        self.recovered   = self.recovered + new_recovered
+        self.infected    = self.infected + new_infected - new_recovered
 
 
 __all__ = ["SIR"]

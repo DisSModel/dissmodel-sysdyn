@@ -35,3 +35,6 @@ Homepage = "https://github.com/DisSModel/dissmodel-sysdyn"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+    "golden: compares the models with TerraME runs (tests/goldens)",
+]
