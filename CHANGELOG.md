@@ -1,6 +1,10 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.0] — 2026-10-22
+
+Every deterministic model now gives the same doubles as TerraME at every
+step (checked against `terrame-goldens` v0.1.0). The trajectories of
+`Daisyworld` and `MonoLake` change.
 
 - **Fix:** `Daisyworld` now follows TerraME: after updating the white area,
   it computes the planet albedo again for the black daisies. The trajectory
