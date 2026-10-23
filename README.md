@@ -28,7 +28,7 @@ The library includes a wide range of System Dynamics models:
 ## Verification against TerraME
 
 Every model was run in TerraME 2.0.1 with the `sysdyn` package
-([`terrame-goldens`](https://github.com/LambdaGeo/terrame-goldens) v0.1.0).
+([`terrame-goldens`](https://github.com/LambdaGeo/terrame-goldens) v0.1.0 ([10.5281/zenodo.23592970](https://doi.org/10.5281/zenodo.23592970))).
 For the 16 deterministic cases (13 models, some with two parameter sets),
 the Python models give **the same doubles as TerraME at every step**, bit for
 bit, for every variable TerraME records, except Daisyworld, whose fourth
