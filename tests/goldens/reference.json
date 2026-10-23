@@ -17,7 +17,7 @@
   "files": {
     "goldens/sysdyn/chaotic_growth.csv.gz": "6328b3248918b88ec4adfc1002a99ec6c4d252fa1e6a3beaa0c1477faa528c75",
     "goldens/sysdyn/coffee.csv.gz": "cf32769b784339a21489a54ef05f1e59c403da6857fa7421dd28e05f1581a4c1",
-    "goldens/sysdyn/daisyworld.csv.gz": "da394371bf4dc84114ae5c5815797d20aaa7fd85b6e7b182446e180f7d747c6c",
+    "goldens/sysdyn/daisyworld.csv.gz": "1b8668e090f51550b12562d5af517d2fe4b2845e1ec68381c4eb21e9bee516b4",
     "goldens/sysdyn/homeostasis.csv.gz": "2cb49a621d7153e98632f7f0e11bfdc47ea04a105a2f659d6976bfa3dfc0fd4f",
     "goldens/sysdyn/homeostasis_100.csv.gz": "6896a8faed843dc0c42f58194b284381fad971e793bed8de531ef26282ac280b",
     "goldens/sysdyn/limited_growth.csv.gz": "9972047016a135b12c2e70e26209d438e1b911dd44ac927c47f4b8eab5f28b87",

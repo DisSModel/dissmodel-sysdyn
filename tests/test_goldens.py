@@ -8,6 +8,14 @@ is recovered exactly. Each model runs with the same parameters and must give
 **the same doubles** as TerraME at every step (bit for bit), for every
 variable TerraME records.
 
+The exception is Daisyworld, whose temperatures take a fourth root
+(``x ** 0.25`` in Python, ``x ^ 0.25`` in Lua). Both languages call the C
+library's ``pow``, and its last bit depends on the library: the goldens come
+from the ``terrame-docker`` image (glibc 2.27), and the same TerraME binary
+on glibc 2.39 differs from the 16th significant digit on (see the README of
+``terrame-goldens``). Python on any recent system behaves like the latter, so
+Daisyworld is compared with a relative tolerance of ``POW_RTOL``.
+
 RandomWalk draws random numbers, so it is compared by distribution with the
 50 TerraME runs.
 """
@@ -27,6 +35,9 @@ import dissmodel_sysdyn.models as sd
 pytestmark = pytest.mark.golden
 
 GOLDENS = Path(__file__).resolve().parent / "goldens"
+
+#: Cases that use the C library's pow, and their relative tolerance (see above).
+POW_RTOL = {"daisyworld": 1e-13}
 
 with open(GOLDENS / "cases.csv", newline="") as _f:
     CASES = [c for c in csv.DictReader(_f) if not c["seeds"]]
@@ -63,7 +74,7 @@ class _Recorder(Model):
 
 
 @pytest.mark.parametrize("case", CASES, ids=[c["case"] for c in CASES])
-def test_trajectory_is_bit_identical_to_terrame(case: dict[str, str]) -> None:
+def test_trajectory_matches_terrame(case: dict[str, str]) -> None:
     variables, ref = load(case["case"])
     attrs = [snake(v) for v in variables]
     env = Environment(start_time=1, end_time=int(case["final_time"]))
@@ -75,7 +86,12 @@ def test_trajectory_is_bit_identical_to_terrame(case: dict[str, str]) -> None:
         for var, e, g in zip(variables, expected, got, strict=True):
             if np.isnan(e):  # not defined yet in TerraME (Daisyworld at step 0)
                 continue
-            assert g == e, f"{case['case']}.{var} at step {t}: {g!r} != TerraME {e!r}"
+            rtol = POW_RTOL.get(case["case"])
+            if rtol is None:
+                assert g == e, f"{case['case']}.{var} at step {t}: {g!r} != TerraME {e!r}"
+            else:
+                assert abs(g - e) <= rtol * abs(e), (
+                    f"{case['case']}.{var} at step {t}: {g!r} vs TerraME {e!r}")
 
 
 def test_random_walk_matches_terrame_distribution() -> None:

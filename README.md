@@ -31,8 +31,11 @@ Every model was run in TerraME 2.0.1 with the `sysdyn` package
 ([`terrame-goldens`](https://github.com/LambdaGeo/terrame-goldens) v0.1.0).
 For the 16 deterministic cases (13 models, some with two parameter sets),
 the Python models give **the same doubles as TerraME at every step**, bit for
-bit, for every variable TerraME records; RandomWalk is compared by
-distribution. `tests/test_goldens.py` runs these comparisons
+bit, for every variable TerraME records, except Daisyworld, whose fourth
+roots go through the C library's `pow`: its last bit depends on the system
+(the goldens come from the `terrame-docker` image, with glibc 2.27), so
+Daisyworld agrees to about 15 significant digits and is compared with a
+relative tolerance of 10⁻¹³. RandomWalk is compared by distribution. `tests/test_goldens.py` runs these comparisons
 (`pytest -m golden`, under a second).
 
 ## Examples
