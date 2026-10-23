@@ -1,7 +1,8 @@
 # TerraME reference values for the sysdyn models
 
 The `sysdyn` suite of
-[`terrame-goldens`](https://github.com/LambdaGeo/terrame-goldens) v0.1.0:
+[`terrame-goldens`](https://github.com/LambdaGeo/terrame-goldens) v0.1.0
+(DOI [10.5281/zenodo.23592970](https://doi.org/10.5281/zenodo.23592970)):
 what TerraME 2.0.1 computed running the models of the
 [`sysdyn`](https://github.com/TerraME/sysdyn) package (commit `9e671cb`; `sci`
 commit `42b0b3e` for MonoLake's spline).
