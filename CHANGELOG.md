@@ -3,7 +3,8 @@
 ## [0.2.0] — 2026-10-22
 
 Every deterministic model now gives the same doubles as TerraME at every
-step (checked against `terrame-goldens` v0.1.0). The trajectories of
+step, except Daisyworld, which agrees to about 15 significant digits (checked
+against `terrame-goldens` v0.1.0). The trajectories of
 `Daisyworld` and `MonoLake` change.
 
 - **Fix:** `Daisyworld` now follows TerraME: after updating the white area,
@@ -20,9 +21,13 @@ step (checked against `terrame-goldens` v0.1.0). The trajectories of
 - `PredatorPrey`, `RoomTemperature`, `SIR` and `MonoLake` do their
   arithmetic in TerraME's order, so that the results are the same doubles.
 - `tests/test_goldens.py` (marker `golden`): every model against TerraME
-  2.0.1 runs from `terrame-goldens` v0.1.0. All 16 deterministic cases
-  (13 models, some with two parameter sets) give **the same doubles as
-  TerraME at every step**; RandomWalk is compared by distribution.
+  2.0.1 runs from `terrame-goldens` v0.1.0, generated in the
+  `terrame-docker` image. 15 of the 16 deterministic cases (13 models, some
+  with two parameter sets) give **the same doubles as TerraME at every
+  step**. Daisyworld is compared with a relative tolerance of 10⁻¹³: its
+  temperatures use the C library's `pow`, whose last bit differs between
+  glibc 2.27 (the image) and newer versions. RandomWalk is compared by
+  distribution.
   `tests/goldens/` holds the goldens, their SHA-256 provenance and the
   script that copies them. The strict `xfail`s of `Daisyworld` and
   `MonoLake` in `test_terrame_parity.py` are removed.
